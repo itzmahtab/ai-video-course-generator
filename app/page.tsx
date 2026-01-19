@@ -2,14 +2,18 @@ import { Button } from "@/components/ui/button";
 import { UserButton } from "@clerk/nextjs";
 import { User } from "lucide-react";
 import Image from "next/image";
-
+import Header from "./_components/Header";
+import Hero from "./_components/Hero";
+import CourseList from "./_components/CourseList";
+import GradientBackground from "./_components/GradientBackground";
 export default function Home() {
   return (
-    
     <div>
-      <h1>Welcome to Ai Video Generator</h1>
-      <Button className="mt-4">Get Started</Button>
-      <UserButton/>
+      <Header />
+      <Hero />
+      <CourseList />
+
+    <GradientBackground />
     </div>
   );
 }
