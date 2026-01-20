@@ -12,6 +12,7 @@ import {
 } from "@clerk/nextjs";
 import Provider from "./provider";
 import Header from "./_components/Header";
+import { Toaster } from "@/components/ui/sonner";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -46,6 +47,7 @@ export default function RootLayout({
           >
             <Provider>
               {children}
+              <Toaster position="top-center" richColors />
               </Provider>
           </ThemeProvider>
         </body>
