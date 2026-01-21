@@ -19,12 +19,15 @@ import { QUICK_VIDEO_SUGGESTIONS } from "@/data/constant";
 import axios from "axios";
 import { toast } from "sonner";
 import { useUser, SignInButton, SignUpButton } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 function Hero() {
   const [userInput, setUserInput] = useState("");
   const [courseType, setCourseType] = useState("full-course");
   const [loading, setLoading] = useState(false);
   const { user, isSignedIn } = useUser();
+ const router = useRouter();
+
 
   const GenerateCourseLayout = async () => {
       const  courseId = await crypto.randomUUID();
@@ -55,6 +58,7 @@ function Hero() {
   
       //go to course editor page
       
+      router.push(`/course/${courseId}`);
 
 
 

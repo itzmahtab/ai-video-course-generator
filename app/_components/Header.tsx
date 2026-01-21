@@ -10,7 +10,7 @@ function Header() {
   const { user } = useUser();
 
   return (
-    <div className="flex items-center justify-between p-4 sticky top-0 z-20 transition-all duration-500 ease-in-out ">
+    <div className="flex items-center shadow-black justify-between p-4 sticky top-0 z-20 transition-all duration-500 ease-in-out ">
       {/* Logo */}
       <div className="flex gap-2 items-center animate-fade-in">
         <Image

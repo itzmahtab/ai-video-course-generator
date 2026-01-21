@@ -9,7 +9,6 @@ import GradientBackground from "./_components/GradientBackground";
 export default function Home() {
   return (
     <div>
-      <Header />
       <Hero />
       <CourseList />
 

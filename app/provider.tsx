@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { UserDeatailContext } from "@/UserDetailContext";
+import Header from "./_components/Header";
 
 function Provider({ children }: { children: React.ReactNode }) {
   const [userDetail, setUserDetail] = useState(null);
@@ -20,7 +21,10 @@ function Provider({ children }: { children: React.ReactNode }) {
   return (
     <div>
       <UserDeatailContext.Provider value={{ userDetail, setUserDetail }}>
-        <div className="max-w-7xl mx-auto">{children}</div>
+        <div className="max-w-7xl mx-auto">
+                <Header />
+          
+          {children}</div>
       </UserDeatailContext.Provider>
     </div>
   );
