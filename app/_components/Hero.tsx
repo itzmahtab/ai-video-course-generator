@@ -26,11 +26,10 @@ function Hero() {
   const [courseType, setCourseType] = useState("full-course");
   const [loading, setLoading] = useState(false);
   const { user, isSignedIn } = useUser();
- const router = useRouter();
-
+  const router = useRouter();
 
   const GenerateCourseLayout = async () => {
-      const  courseId = await crypto.randomUUID();
+    const courseId = await crypto.randomUUID();
 
     if (!userInput.trim()) {
       toast.error("Please enter a course topic");
@@ -49,32 +48,28 @@ function Hero() {
       const result = await axios.post("/api/generate", {
         userInput,
         type: courseType,
-        courseId:courseId,
+        courseId: courseId,
       });
 
       console.log("AI RESULT:", result.data);
 
       toast.success("Course layout generated!", { id: toastId });
-  
+
       //go to course editor page
-      
+
       router.push(`/course/${courseId}`);
-
-
-
     } catch (error: any) {
       console.error("Client Error:", error);
 
       if (error?.response?.status === 503) {
         toast.error(
           "AI service is temporarily unavailable. Please try again later.",
-          { id: toastId }
+          { id: toastId },
         );
       } else if (error?.response?.status === 422) {
-        toast.error(
-          "AI returned an invalid response. Please try again.",
-          { id: toastId }
-        );
+        toast.error("AI returned an invalid response. Please try again.", {
+          id: toastId,
+        });
       } else {
         toast.error("Something went wrong. Please try again.", { id: toastId });
       }
@@ -123,7 +118,15 @@ function Hero() {
           {/* Send Button at the end of the textarea */}
           <InputGroupButton
             size="icon-sm"
-            className="absolute bottom-2 right-2"
+       className="
+  absolute bottom-2 right-2
+  transition-all duration-300 ease-out
+  hover:shadow-lg hover:-translate-y-1
+
+  bg-black text-white
+  dark:bg-white dark:text-black
+"
+
             onClick={GenerateCourseLayout}
             disabled={loading || !isSignedIn}
           >
@@ -151,7 +154,11 @@ function Hero() {
           <div
             key={suggestion.id}
             onClick={() => setUserInput(suggestion.prompt)}
-            className="p-4 mt-4 cursor-pointer rounded-lg border hover:shadow-md"
+            className="
+  p-4 mt-4 cursor-pointer rounded-lg border
+  transition-all duration-300 ease-out
+  hover:shadow-lg hover:-translate-y-1
+"
           >
             {suggestion.title}
           </div>

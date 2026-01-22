@@ -18,3 +18,12 @@ export const coursesTable = pgTable("courses", {
   courselayout:json(),
   createdAt: timestamp().defaultNow(),
 });
+
+export const chapterstable = pgTable("chapters", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  courseId: varchar({ length: 255 }).notNull().references(() => coursesTable.courseId),
+  chapterId: varchar({ length: 255 }).notNull().unique(),
+  chapterName: varchar({ length: 255 }).notNull(),
+  content: json().notNull(),
+  createdAt: timestamp().defaultNow(),
+});

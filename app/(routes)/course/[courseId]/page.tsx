@@ -22,6 +22,12 @@ function CoursePreview() {
     console.log( result.data);
     setCourseDetail(result.data);
   }
+
+  const GenerateVideoContent = async () => {
+    
+  }
+
+
   return (
     <div className="flex flex-col items-center">
       <CourseInfoCard course={courseDetail} />
