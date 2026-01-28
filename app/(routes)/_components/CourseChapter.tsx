@@ -1,25 +1,31 @@
+"use client";
+
+import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Course } from "@/type/CourseType";
 import { Player } from "@remotion/player";
 import { Dot } from "lucide-react";
-import React from "react";
 import ChapterVideo from "./ChapterVideo";
 
 type Props = {
   course: Course | undefined;
 };
+
 function CourseChapter({ course }: Props) {
+  // Ensure we always have chapters array to avoid crashes
+  const chapters = course?.courselayout?.chapters ?? [];
+
   return (
     <div className="max-w-6xl -mt-5 p-10 border rounded-3xl shadow-lg w-full bg-background/80 backdrop-blur">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center mb-5">
         <h2 className="font-bold text-2xl">Course Preview</h2>
         <h2 className="text-sm text-muted-foreground">
           Chapters and Short Preview
         </h2>
       </div>
 
-      <div>
-        {course?.courselayout.chapters.map((chapter, index) => (
+      <div className="flex flex-col gap-5">
+        {chapters.map((chapter, index) => (
           <Card className="mb-5" key={index}>
             <CardHeader>
               <div className="flex gap-3 items-center">
@@ -32,40 +38,35 @@ function CourseChapter({ course }: Props) {
               </div>
             </CardHeader>
 
-
             <CardContent>
-                <div className="grid grid-cols-2 gap-5 ">
-                      <div className="flex flex-col gap-3">
-                      {chapter?.subContent &&
-                     Array.isArray(chapter.subContent) &&
-                      chapter.subContent.map((content: string, index: number) => (
-                        <div key={index} className="flex gap-2 items-center mt-2">
-                      <Dot className=" mt-1 h-5 w-5 text-primary" />
-                      <h2>{content}</h2>
-                    </div>
-                  ))}
-              </div>
-              <div>
-                    <Player
-            component={ChapterVideo}
-            durationInFrames={30}
-            compositionWidth={1280}
-            compositionHeight={720}
-            fps={30}
-            controls
-            style={
-              {
-              width :'80%',
-              height:'180px',
-              aspectRatio:'16/9',
-
-              }
-
-            }
-
-          />
-              </div>
+              <div className="grid grid-cols-2 gap-5">
+                <div className="flex flex-col gap-3">
+                  {chapter.subContent &&
+                    Array.isArray(chapter.subContent) &&
+                    chapter.subContent.map((content: string, idx: number) => (
+                      <div key={idx} className="flex gap-2 items-center mt-2">
+                        <Dot className="mt-1 h-5 w-5 text-primary" />
+                        <h2>{content}</h2>
+                      </div>
+                    ))}
                 </div>
+
+                <div>
+                  <Player
+                    component={ChapterVideo}
+                    durationInFrames={30}
+                    compositionWidth={1280}
+                    compositionHeight={720}
+                    fps={30}
+                    controls
+                    style={{
+                      width: "80%",
+                      height: "180px",
+                      aspectRatio: "16/9",
+                    }}
+                  />
+                </div>
+              </div>
             </CardContent>
           </Card>
         ))}

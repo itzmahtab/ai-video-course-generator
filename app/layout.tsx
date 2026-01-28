@@ -13,6 +13,12 @@ import {
 import Provider from "./provider";
 import Header from "./_components/Header";
 import { Toaster } from "@/components/ui/sonner";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+import { ourFileRouter } from "./api/uploadthing/core";
+
+const routerConfig = extractRouterConfig(ourFileRouter);
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -46,7 +52,8 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Provider>
-              {children}
+               <NextSSRPlugin routerConfig={routerConfig} />
+               {children}
               <Toaster position="top-center" richColors />
               </Provider>
           </ThemeProvider>
