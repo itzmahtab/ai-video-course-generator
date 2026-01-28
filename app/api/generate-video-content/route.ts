@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
   let audioFileURL: string[] = [];
 
   for (let i = 0; i < VideoContentJSON?.length; i++) {
-    if (i > 0) break; // 🧪 testing only first slide
+    // if (i > 0) break; // 🧪 testing only first slide
 
     const narrationText = VideoContentJSON[i].narration.fullText;
 
